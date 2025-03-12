@@ -1,0 +1,191 @@
+@import 'tailwindcss';
+
+body {
+  @apply h-full w-full;
+}
+
+.app {
+  @apply flex flex-col justify-center items-center w-screen h-screen;
+}
+
+#go {
+  @apply h-11/12 w-full flex flex-row justify-center gap-4;
+}
+
+.board {
+  @apply h-full grid aspect-square gap-0 bg-amber-200 p-4;
+}
+
+.size-9 {
+  grid-template-columns: repeat(9, minmax(0, 1fr));
+}
+.size-13 {
+  grid-template-columns: repeat(13, minmax(0, 1fr));
+}
+.size-19 {
+  grid-template-columns: repeat(19, minmax(0, 1fr));
+}
+
+.square {
+  @apply relative h-full aspect-square bg-amber-200;
+  --border-color: #000;
+  --border-width: 1px;
+  cursor: pointer;
+}
+
+.square .star {
+  position: absolute;
+  top: calc(50% - 0.3rem);
+  left: calc(50% - 0.3rem);
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  background: var(--border-color);
+  pointer-events: none;
+}
+
+.square .stone {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  width: 80%;
+  height: 80%;
+  border-radius: 50%;
+  background: var(--border-color);
+  pointer-events: none;
+  z-index: 10;
+}
+.square .stone.black {
+  @apply bg-gray-900 border-1 border-gray-900;
+}
+.square .stone.white {
+  @apply bg-gray-200 border-1 border-gray-900;
+}
+
+.square .illegal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+.square .illegal::before,
+.square .illegal::after {
+  position: absolute;
+  top: calc(50% - 0.1rem);
+  left: 10%;
+  content: '';
+  width: 80%;
+  height: 0.2rem;
+  background-color: red;
+}
+.square .illegal::before {
+  transform: rotate(45deg);
+}
+.square .illegal::after {
+  transform: rotate(-45deg);
+}
+
+.square::before,
+.square::after {
+  content: '';
+  position: absolute;
+  border-color: var(--border-color);
+  border-style: solid;
+}
+
+.square::before {
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  border-width: var(--border-width) 0 0 0;
+}
+
+.square::after {
+  right: 50%;
+  transform: translateX(50%);
+  height: 100%;
+  border-width: 0 var(--border-width) 0 0;
+}
+
+.square-center::before,
+.square-top::before,
+.square-bottom::before {
+  width: 100%;
+}
+
+.square-left::before,
+.square-right::before,
+.square-top-left::before,
+.square-top-right::before,
+.square-bottom-left::before,
+.square-bottom-right::before {
+  width: 50%;
+}
+
+.square-top::after,
+.square-bottom::after,
+.square-top-left::after,
+.square-top-right::after,
+.square-bottom-left::after,
+.square-bottom-right::after {
+  height: 50%;
+}
+
+.square-left::after,
+.square-right::after {
+  height: 100%;
+}
+
+.square-right::before,
+.square-top-right::before,
+.square-bottom-right::before {
+  left: 0;
+}
+
+.square-top-left::after,
+.square-top-right::after {
+  bottom: 0;
+}
+
+.square-top::after {
+  top: 50%;
+}
+
+.square-left::before,
+.square-top-left::before,
+.square-bottom-left::before {
+  left: 50%;
+}
+
+.marker {
+  @apply h-full w-2/12  flex flex-col gap-4;
+}
+
+.marker .players {
+  @apply h-2/12 w-full flex gap-4;
+}
+.marker .players .white {
+  @apply h-full w-1/2 bg-gray-200 border-1 border-gray-900 rounded-xl flex justify-center items-center text-gray-900;
+}
+.marker .players .black {
+  @apply h-full w-1/2 bg-gray-900 border-1 border-gray-900 rounded-xl flex justify-center items-center text-gray-200;
+}
+
+.marker .actions {
+  @apply h-1/12 w-full rounded-xl flex flex-row gap-2 justify-center items-center;
+}
+
+.marker .status {
+  @apply h-1/12 w-full text-lg font-semibold rounded-xl flex flex-row gap-2 justify-center items-center;
+}
+
+.marker .chat {
+  @apply grow w-full bg-gray-200 rounded-xl;
+}
+
+.btn {
+  @apply h-10 bg-gray-300 px-4 py-2 rounded-sm cursor-pointer hover:bg-gray-400;
+}
